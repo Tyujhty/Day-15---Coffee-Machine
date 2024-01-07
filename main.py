@@ -13,7 +13,7 @@ def check_resources(coffee_selection):
         if coffee_selection['ingredients'][ingredient] > resources[ingredient]:
             print(f"Sorry there is not enough {ingredient}.")
         else:
-            resources[ingredient] = resources[ingredient] - coffee_selection['ingredients'][ingredient]
+            resources[ingredient] -= coffee_selection['ingredients'][ingredient]
             print(resources[ingredient])
 
 consumer_choice = input("What would you like?: (espresso/latte/cappuccino): ")
