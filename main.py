@@ -10,17 +10,17 @@ def check_choice(consumer_choice):
 
 
 def check_resources(coffee_selection):
-    coffer_ingredients = coffee_selection['ingredients']
+    coffee_ingredients = coffee_selection['ingredients']
     missing_ingredient = []
-    for ingredient in coffer_ingredients:
-        if coffer_ingredients[ingredient] > resources[ingredient]:
+    for ingredient in coffee_ingredients:
+        if coffee_ingredients[ingredient] > resources[ingredient]:
             missing_ingredient.append(ingredient)
     if missing_ingredient:
         print(f"Sorry there is not enough {', '.join(missing_ingredient)}.")
     else:
-        for ingredient in coffer_ingredients:
-            resources[ingredient] -= coffer_ingredients[ingredient]
-            return resources
+        for ingredient in coffee_ingredients:
+            resources[ingredient] -= coffee_ingredients[ingredient]
+        return resources, True
 
 
 def insert_coin():
@@ -35,7 +35,6 @@ def insert_coin():
 
 
 def pay_coffee(coffee_selection):
-
     price_coffee = coffee_selection['cost']
 
     print(f"{price_coffee}$, please insert coins.")
@@ -46,8 +45,11 @@ def pay_coffee(coffee_selection):
 
     if total_pay > price_coffee or total_pay == price_coffee:
         if total_pay > price_coffee:
+            resources['money'] -= total_change
             print(f"Here is ${total_change} in change.")
-        print("Here's your coffee")
+        print("Here's your coffee ☕")
+        return resources['money']
+
     elif total_pay < price_coffee:
         print("Sorry that's not enough money. Money refunded")
         pay_coffee(coffee_selection)
@@ -56,12 +58,15 @@ def pay_coffee(coffee_selection):
 def coffee_machine():
     consumer_choice = input("What would you like?: (espresso/latte/cappuccino): ")
     if consumer_choice == 'report':
-        print(f"Water: {resources['water']}ml\nMilk: {resources['milk']}ml\nCoffee: {resources['coffee']}g")
+        print(f"Water: {resources['water']}ml\nMilk: {resources['milk']}ml\nCoffee: {resources['coffee']}g\nMoney: ${resources['money']}")
         coffee_machine()
+    elif consumer_choice == 'off':
+        print("The coffee machine will shut down.")
     else:
         coffee_selection = check_choice(consumer_choice)
         check_resources(coffee_selection)
-        pay_coffee(coffee_selection)
-
+        if check_resources(coffee_selection):
+            pay_coffee(coffee_selection)
+            coffee_machine()
 
 coffee_machine()
