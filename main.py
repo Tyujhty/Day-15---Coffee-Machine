@@ -44,17 +44,13 @@ def pay_coffee(coffee_selection):
 
     total_change = total_pay - price_coffee
 
-    if total_pay > price_coffee:
-        print(f"Here is ${total_change} in change.")
-    elif total_pay < price_coffee:
-        print(f"You have to complete ${total_change} in change, please insert coin.")
-        complete_total = 0
-        while complete_total > total_change:
-            complete_total = insert_coin()
-            print(complete_total, total_change)
-            insert_coin()
-
+    if total_pay > price_coffee or total_pay == price_coffee:
+        if total_pay > price_coffee:
+            print(f"Here is ${total_change} in change.")
         print("Here's your coffee")
+    elif total_pay < price_coffee:
+        print("Sorry that's not enough money. Money refunded")
+        pay_coffee(coffee_selection)
 
 
 def coffee_machine():
