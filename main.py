@@ -26,7 +26,7 @@ def check_resources(coffee_selection):
 def insert_coin():
     quarter = int(input("How many quarters?: ")) * 0.25
     dime = int(input("How many dimes: ")) * 0.10
-    nickle = int(input("How many nickels?: ")) * 0.05
+    nickle = int(input("How many nickles?: ")) * 0.05
     penny = int(input("How many pennies?: ")) * 0.25
 
     total_pay = quarter + dime + nickle + penny
@@ -47,7 +47,7 @@ def pay_coffee(coffee_selection):
         if total_pay > price_coffee:
             resources['money'] -= total_change
             print(f"Here is ${total_change} in change.")
-        print("Here's your coffee ☕")
+        print("Here's your coffee ☕️")
         return resources['money']
 
     elif total_pay < price_coffee:
