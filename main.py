@@ -58,7 +58,8 @@ def pay_coffee(coffee_selection):
 def coffee_machine():
     consumer_choice = input("What would you like?: (espresso/latte/cappuccino): ")
     if consumer_choice == 'report':
-        print(f"Water: {resources['water']}ml\nMilk: {resources['milk']}ml\nCoffee: {resources['coffee']}g\nMoney: ${resources['money']}")
+        print(
+            f"Water: {resources['water']}ml\nMilk: {resources['milk']}ml\nCoffee: {resources['coffee']}g\nMoney: ${resources['money']}")
         coffee_machine()
     elif consumer_choice == 'off':
         print("The coffee machine will shut down.")
@@ -68,5 +69,6 @@ def coffee_machine():
         if check_resources(coffee_selection):
             pay_coffee(coffee_selection)
             coffee_machine()
+
 
 coffee_machine()
